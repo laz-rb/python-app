@@ -28,11 +28,26 @@ jobs:
         with:
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/python-app:${{ env.commit_id }}
+    outputs:
+      commit_id: ${{ env.commit_id }}
   
   cd:
     needs: ci
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Modify helm values file
+        shell: bash
+        run: |
+          ls -la charts/python-app/values.yaml
+          sed -i "s/tag: .*/tag: ${{ needs.ci.outputs.commit_id }}/" charts/python-app/values.yaml
+
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Updated image tag to ${{ needs.ci.outputs.commit_id }}"
+    
       - name: Install argocd cli
         shell: bash
         run: |
