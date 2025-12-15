@@ -1,0 +1,12 @@
+---
+site_name: 'python-app'
+site_description: 'Documentation for python-app'
+repo_url: https://github.com/laz-rb/python-app
+edit_uri: edit/main/docs
+
+plugins:
+  - techdocs-core
+
+nav:
+  - Overview:
+      - Getting started: 'docs/index.md'

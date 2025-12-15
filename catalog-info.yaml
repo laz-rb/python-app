@@ -6,7 +6,9 @@ metadata:
   description: Python app that displays the current date and time.
   annotations:
     github.com/project-slug: laz-rb/python-app
-
+    # Thec docs look for docs dir
+    backstage.io/techdocs-ref: dir:.
+  
 spec:
   type: service
   owner: development
